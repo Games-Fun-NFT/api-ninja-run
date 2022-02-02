@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26-Jan-2022 às 21:16
+-- Tempo de geração: 31-Jan-2022 às 19:44
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -33,6 +33,7 @@ CREATE TABLE `nft` (
   `star` varchar(255) NOT NULL,
   `rounds` int(11) NOT NULL,
   `damage` int(11) NOT NULL,
+  `hour_fix_rounds_now` int(11) NOT NULL,
   `day_buy` int(11) NOT NULL,
   `day_renew` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -41,38 +42,19 @@ CREATE TABLE `nft` (
 -- Extraindo dados da tabela `nft`
 --
 
-INSERT INTO `nft` (`id`, `owner`, `star`, `rounds`, `damage`, `day_buy`, `day_renew`) VALUES
-(1, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(2, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'two', 2, 2, 1, 45),
-(3, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(4, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'two', 2, 2, 1, 45),
-(5, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(6, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(7, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'two', 2, 2, 1, 45),
-(8, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(9, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(10, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(11, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(12, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'three', 4, 4, 1, 45),
-(13, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'three', 4, 4, 1, 45),
-(14, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'three', 4, 4, 1, 45),
-(15, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'three', 4, 4, 1, 45),
-(16, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(17, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'three', 4, 4, 1, 45),
-(18, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(19, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(20, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(21, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(22, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(23, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(24, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(25, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(26, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(27, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'three', 4, 4, 1, 45),
-(28, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(29, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'two', 2, 2, 1, 45),
-(30, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45),
-(31, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 1, 45);
+INSERT INTO `nft` (`id`, `owner`, `star`, `rounds`, `damage`, `hour_fix_rounds_now`, `day_buy`, `day_renew`) VALUES
+(788, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 0, 1, 0, 1, 45),
+(789, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'three', 4, 4, 0, 1, 45),
+(790, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 0, 1, 45),
+(791, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 0, 1, 45),
+(792, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 0, 1, 45),
+(793, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 0, 1, 45),
+(794, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 0, 1, 45),
+(795, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 0, 1, 45),
+(796, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'two', 2, 2, 0, 1, 45),
+(797, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 0, 1, 45),
+(798, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'two', 2, 2, 0, 1, 45),
+(799, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 0, 1, 45);
 
 -- --------------------------------------------------------
 
@@ -105,7 +87,9 @@ INSERT INTO `nft_status` (`id`, `star`, `rounds`, `damage`) VALUES
 
 CREATE TABLE `prices` (
   `id` int(11) NOT NULL,
-  `ships` int(30) NOT NULL,
+  `box_one` int(30) NOT NULL,
+  `box_two` int(11) NOT NULL,
+  `box_three` int(11) NOT NULL,
   `fuel` int(30) NOT NULL,
   `damage` int(30) NOT NULL,
   `renew_price` int(30) NOT NULL
@@ -115,8 +99,8 @@ CREATE TABLE `prices` (
 -- Extraindo dados da tabela `prices`
 --
 
-INSERT INTO `prices` (`id`, `ships`, `fuel`, `damage`, `renew_price`) VALUES
-(1, 200, 1, 1, 120);
+INSERT INTO `prices` (`id`, `box_one`, `box_two`, `box_three`, `fuel`, `damage`, `renew_price`) VALUES
+(1, 200, 0, 0, 1, 1, 120);
 
 -- --------------------------------------------------------
 
@@ -156,7 +140,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `address`, `balance_token`, `balance_usdt`, `tnx_hash_token`, `tnx_hash_usdt`) VALUES
 (6, 'a', 0, 0, '', ''),
-(7, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 2, 0, '', '');
+(7, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 199883200, 0, '', ''),
+(8, '0xf73b3704459E7a14ea81588D6D950112343c72EE', 0, 0, '', '');
 
 --
 -- Índices para tabelas despejadas
@@ -200,7 +185,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de tabela `nft`
 --
 ALTER TABLE `nft`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=800;
 
 --
 -- AUTO_INCREMENT de tabela `nft_status`
@@ -224,7 +209,7 @@ ALTER TABLE `rewards`
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

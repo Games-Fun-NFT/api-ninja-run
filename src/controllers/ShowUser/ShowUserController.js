@@ -20,7 +20,7 @@ exports.user = async (req, res) => {
 
     let showUserDB = await showUser(userAddres)
 
-    if (showUser.length > 0) {
+    if (showUser.length === 1) {
         res.json({
             showUserDB
         })
