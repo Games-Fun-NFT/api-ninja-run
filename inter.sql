@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Tempo de geração: 31-Jan-2022 às 19:44
--- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 8.1.1
+-- Host: localhost
+-- Tempo de geração: 06/02/2022 às 01:15
+-- Versão do servidor: 10.4.21-MariaDB
+-- Versão do PHP: 7.3.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `nft`
+-- Estrutura para tabela `nft`
 --
 
 CREATE TABLE `nft` (
@@ -33,33 +33,29 @@ CREATE TABLE `nft` (
   `star` varchar(255) NOT NULL,
   `rounds` int(11) NOT NULL,
   `damage` int(11) NOT NULL,
-  `hour_fix_rounds_now` int(11) NOT NULL,
+  `select_farm` varchar(255) NOT NULL DEFAULT 'NO',
+  `hour_fix_rounds_now` int(11) NOT NULL DEFAULT 0,
   `day_buy` int(11) NOT NULL,
   `day_renew` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `nft`
+-- Despejando dados para a tabela `nft`
 --
 
-INSERT INTO `nft` (`id`, `owner`, `star`, `rounds`, `damage`, `hour_fix_rounds_now`, `day_buy`, `day_renew`) VALUES
-(788, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 0, 1, 0, 1, 45),
-(789, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'three', 4, 4, 0, 1, 45),
-(790, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 0, 1, 45),
-(791, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 0, 1, 45),
-(792, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 0, 1, 45),
-(793, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 0, 1, 45),
-(794, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 0, 1, 45),
-(795, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 0, 1, 45),
-(796, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'two', 2, 2, 0, 1, 45),
-(797, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 0, 1, 45),
-(798, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'two', 2, 2, 0, 1, 45),
-(799, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'one', 1, 1, 0, 1, 45);
+INSERT INTO `nft` (`id`, `owner`, `star`, `rounds`, `damage`, `select_farm`, `hour_fix_rounds_now`, `day_buy`, `day_renew`) VALUES
+(817, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'three', 4, 4, 'YES', 0, 1, 45),
+(818, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'two', 2, 2, 'NO', 0, 1, 45),
+(819, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'four', 6, 6, 'NO', 0, 1, 45),
+(820, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'three', 4, 4, 'NO', 0, 1, 45),
+(821, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'four', 6, 6, 'NO', 0, 1, 45),
+(822, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'four', 6, 6, 'NO', 0, 1, 45),
+(823, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'two', 2, 2, 'NO', 0, 1, 45);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `nft_status`
+-- Estrutura para tabela `nft_status`
 --
 
 CREATE TABLE `nft_status` (
@@ -70,7 +66,7 @@ CREATE TABLE `nft_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `nft_status`
+-- Despejando dados para a tabela `nft_status`
 --
 
 INSERT INTO `nft_status` (`id`, `star`, `rounds`, `damage`) VALUES
@@ -82,7 +78,7 @@ INSERT INTO `nft_status` (`id`, `star`, `rounds`, `damage`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `prices`
+-- Estrutura para tabela `prices`
 --
 
 CREATE TABLE `prices` (
@@ -96,7 +92,7 @@ CREATE TABLE `prices` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `prices`
+-- Despejando dados para a tabela `prices`
 --
 
 INSERT INTO `prices` (`id`, `box_one`, `box_two`, `box_three`, `fuel`, `damage`, `renew_price`) VALUES
@@ -105,7 +101,7 @@ INSERT INTO `prices` (`id`, `box_one`, `box_two`, `box_three`, `fuel`, `damage`,
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `rewards`
+-- Estrutura para tabela `rewards`
 --
 
 CREATE TABLE `rewards` (
@@ -122,70 +118,69 @@ CREATE TABLE `rewards` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user`
+-- Estrutura para tabela `user`
 --
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `balance_token` int(30) NOT NULL,
-  `balance_usdt` int(30) NOT NULL,
-  `tnx_hash_token` varchar(255) NOT NULL,
-  `tnx_hash_usdt` varchar(255) NOT NULL
+  `address` varchar(255) NOT NULL DEFAULT '0x',
+  `token_acess` varchar(255) NOT NULL DEFAULT '0x',
+  `balance_token` int(30) NOT NULL DEFAULT 0,
+  `balance_usdt` int(30) NOT NULL DEFAULT 0,
+  `tnx_hash_token` varchar(255) NOT NULL DEFAULT '0x',
+  `tnx_hash_usdt` varchar(255) NOT NULL DEFAULT '0x'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `user`
+-- Despejando dados para a tabela `user`
 --
 
-INSERT INTO `user` (`id`, `address`, `balance_token`, `balance_usdt`, `tnx_hash_token`, `tnx_hash_usdt`) VALUES
-(6, 'a', 0, 0, '', ''),
-(7, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 199883200, 0, '', ''),
-(8, '0xf73b3704459E7a14ea81588D6D950112343c72EE', 0, 0, '', '');
+INSERT INTO `user` (`id`, `address`, `token_acess`, `balance_token`, `balance_usdt`, `tnx_hash_token`, `tnx_hash_usdt`) VALUES
+(9, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'joao', 199600, 0, '0x', '0x');
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `nft`
+-- Índices de tabela `nft`
 --
 ALTER TABLE `nft`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `nft_status`
+-- Índices de tabela `nft_status`
 --
 ALTER TABLE `nft_status`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `prices`
+-- Índices de tabela `prices`
 --
 ALTER TABLE `prices`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `rewards`
+-- Índices de tabela `rewards`
 --
 ALTER TABLE `rewards`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `user`
+-- Índices de tabela `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `nft`
 --
 ALTER TABLE `nft`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=800;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=824;
 
 --
 -- AUTO_INCREMENT de tabela `nft_status`
@@ -209,7 +204,7 @@ ALTER TABLE `rewards`
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
