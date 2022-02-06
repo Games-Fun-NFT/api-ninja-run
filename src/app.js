@@ -17,8 +17,9 @@ const SelectIdFrontRoutes = require('./routes/SelectNft/SelectNftIdRoutes')
 const FixRoundsRoutes     = require('./routes/FixShips/FixRoundsController')
 const AcessTokenRoutes    = require('./routes/AcessToken/AcessTokenRoutes')
 const SelectNavRoutes     = require('./routes/AcessToken/SelectNavRoutes/SelectNavRoutes')
+const IndexRoute          = require('./routes/Index/IndexRoute')
 
-
+app.use('/', IndexRoute)
 app.use('/register', RegisterUserRoutes)
 app.use('/user', ShowUserRoutes)
 app.use('/onebuy', BuyNftOneRoutes)
