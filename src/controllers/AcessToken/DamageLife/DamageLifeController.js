@@ -56,11 +56,7 @@ exports.damage = async (req, res) =>
         console.log(showNFTDB.length)
 
         if (showNFTDB.length === 1) {
-            console.log(showNFTDB)
-
             let lifeNow = showNFTDB[0].life
-
-            console.log(lifeNow)
 
             if (lifeNow >= 1) {
                 lifeNow = lifeNow - 1

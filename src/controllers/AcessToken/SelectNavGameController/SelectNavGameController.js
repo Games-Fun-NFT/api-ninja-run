@@ -42,9 +42,6 @@ exports.select = async (req, res) => {
     if (addresUserDB != undefined) 
     {
         let showShipDB   = await showNft(addresUserDB)
-
-        console.log(showUserDB.length)
-        console.log(showShipDB)
         
         let nftLife      = showShipDB[0]?.life ?? undefined
         
