@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        async function selectScore(score)
+        {
+            
+        }
+
+
+       async function score()
+       {
+           let score    = await fetch('http://localhost:3000/score/')
+
+           let response = await score.json() 
+
+          for (let index = 0; index < response.score.length; index++) {
+                const owner = response.score[index];
+
+                console.log(owner)
+                
+                let pointsFront = document.createElement('li')
+                let scoreFront  = document.getElementById('score')
+                let ownerFront  = document.getElementById('owner') 
+                let listUser    = document.getElementById('user-list')
+
+                pointsFront.innerHTML = `Score: ${owner.score} Owner: ${owner.owner}`
+
+                listUser.appendChild(pointsFront)
+            }
+       }
+
+
+       score()
+    </script>
+
+
+    <ol id="user-list">
+        <H3>Rank</H3>
+
+    </ol>
+
+</body>
+</html>

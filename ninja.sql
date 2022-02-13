@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 06/02/2022 às 01:15
+-- Tempo de geração: 13/02/2022 às 06:36
 -- Versão do servidor: 10.4.21-MariaDB
 -- Versão do PHP: 7.3.33
 
@@ -18,8 +18,29 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `inter`
+-- Banco de dados: `ninja`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `inventory`
+--
+
+CREATE TABLE `inventory` (
+  `id` int(11) NOT NULL,
+  `owner` varchar(255) NOT NULL,
+  `ticktes` int(11) NOT NULL DEFAULT 0,
+  `ticket_valid` varchar(255) NOT NULL DEFAULT '00',
+  `bombs` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Despejando dados para a tabela `inventory`
+--
+
+INSERT INTO `inventory` (`id`, `owner`, `ticktes`, `ticket_valid`, `bombs`) VALUES
+(2, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 120, '00', 80);
 
 -- --------------------------------------------------------
 
@@ -30,27 +51,15 @@ SET time_zone = "+00:00";
 CREATE TABLE `nft` (
   `id` int(11) NOT NULL,
   `owner` varchar(255) NOT NULL,
-  `star` varchar(255) NOT NULL,
-  `rounds` int(11) NOT NULL,
-  `damage` int(11) NOT NULL,
-  `select_farm` varchar(255) NOT NULL DEFAULT 'NO',
-  `hour_fix_rounds_now` int(11) NOT NULL DEFAULT 0,
-  `day_buy` int(11) NOT NULL,
-  `day_renew` int(11) NOT NULL
+  `life` int(11) NOT NULL DEFAULT 5
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Despejando dados para a tabela `nft`
 --
 
-INSERT INTO `nft` (`id`, `owner`, `star`, `rounds`, `damage`, `select_farm`, `hour_fix_rounds_now`, `day_buy`, `day_renew`) VALUES
-(817, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'three', 4, 4, 'YES', 0, 1, 45),
-(818, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'two', 2, 2, 'NO', 0, 1, 45),
-(819, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'four', 6, 6, 'NO', 0, 1, 45),
-(820, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'three', 4, 4, 'NO', 0, 1, 45),
-(821, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'four', 6, 6, 'NO', 0, 1, 45),
-(822, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'four', 6, 6, 'NO', 0, 1, 45),
-(823, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'two', 2, 2, 'NO', 0, 1, 45);
+INSERT INTO `nft` (`id`, `owner`, `life`) VALUES
+(831, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 0);
 
 -- --------------------------------------------------------
 
@@ -60,20 +69,16 @@ INSERT INTO `nft` (`id`, `owner`, `star`, `rounds`, `damage`, `select_farm`, `ho
 
 CREATE TABLE `nft_status` (
   `id` int(11) NOT NULL,
-  `star` varchar(222) NOT NULL,
-  `rounds` int(11) NOT NULL,
-  `damage` int(11) NOT NULL
+  `life` int(11) NOT NULL,
+  `double_rewards` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Despejando dados para a tabela `nft_status`
 --
 
-INSERT INTO `nft_status` (`id`, `star`, `rounds`, `damage`) VALUES
-(1, 'one', 1, 1),
-(2, 'two', 2, 2),
-(3, 'three', 4, 4),
-(4, 'four', 6, 6);
+INSERT INTO `nft_status` (`id`, `life`, `double_rewards`) VALUES
+(1, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -83,20 +88,16 @@ INSERT INTO `nft_status` (`id`, `star`, `rounds`, `damage`) VALUES
 
 CREATE TABLE `prices` (
   `id` int(11) NOT NULL,
-  `box_one` int(30) NOT NULL,
-  `box_two` int(11) NOT NULL,
-  `box_three` int(11) NOT NULL,
-  `fuel` int(30) NOT NULL,
-  `damage` int(30) NOT NULL,
-  `renew_price` int(30) NOT NULL
+  `price_nft` int(11) NOT NULL,
+  `renew_life` int(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Despejando dados para a tabela `prices`
 --
 
-INSERT INTO `prices` (`id`, `box_one`, `box_two`, `box_three`, `fuel`, `damage`, `renew_price`) VALUES
-(1, 200, 0, 0, 1, 1, 120);
+INSERT INTO `prices` (`id`, `price_nft`, `renew_life`) VALUES
+(1, 40, 2);
 
 -- --------------------------------------------------------
 
@@ -106,14 +107,15 @@ INSERT INTO `prices` (`id`, `box_one`, `box_two`, `box_three`, `fuel`, `damage`,
 
 CREATE TABLE `rewards` (
   `id` int(11) NOT NULL,
-  `id_nft` int(11) NOT NULL,
-  `rewards_50` int(30) NOT NULL,
-  `rewards_40` int(11) NOT NULL,
-  `rewards_30` int(11) NOT NULL,
-  `rewards_20` int(11) NOT NULL,
-  `rewards_10` int(11) NOT NULL,
-  `rewards_0` int(11) NOT NULL
+  `rewards_token` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Despejando dados para a tabela `rewards`
+--
+
+INSERT INTO `rewards` (`id`, `rewards_token`) VALUES
+(1, 5);
 
 -- --------------------------------------------------------
 
@@ -136,11 +138,18 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `address`, `token_acess`, `balance_token`, `balance_usdt`, `tnx_hash_token`, `tnx_hash_usdt`) VALUES
-(9, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'joao', 199600, 0, '0x', '0x');
+(11, '0xf73b3704459e7a14ea81588d6d950112343c72ee', 'joao', 199470, 15, '0x', '0x'),
+(12, '0x9e9d87422add0d4aa050235a0b5115fb5593c2ff', 'joao1234', 0, 3728, '0x', '0x832112843b38f49e88252ead2d5329d9abfd4dde31f667932921f7bc12132926');
 
 --
 -- Índices para tabelas despejadas
 --
+
+--
+-- Índices de tabela `inventory`
+--
+ALTER TABLE `inventory`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices de tabela `nft`
@@ -177,16 +186,22 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT de tabela `inventory`
+--
+ALTER TABLE `inventory`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de tabela `nft`
 --
 ALTER TABLE `nft`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=824;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=832;
 
 --
 -- AUTO_INCREMENT de tabela `nft_status`
 --
 ALTER TABLE `nft_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `prices`
@@ -198,13 +213,13 @@ ALTER TABLE `prices`
 -- AUTO_INCREMENT de tabela `rewards`
 --
 ALTER TABLE `rewards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

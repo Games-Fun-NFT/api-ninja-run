@@ -15,12 +15,12 @@ async function showUser (token)
     
 }
 
-async function showShipFarm (address, option)
+async function showNft (address)
 {
 
     try 
     {
-        return knex('nft').select('*').where('owner', address).andWhere('select_farm', option)
+        return knex('nft').select('*').where('owner', address)
 
     } catch (error) 
     {
@@ -41,25 +41,29 @@ exports.select = async (req, res) => {
 
     if (addresUserDB != undefined) 
     {
-        let showShipDB   = await showShipFarm(addresUserDB, 'YES')
+        let showShipDB   = await showNft(addresUserDB)
 
         console.log(showUserDB.length)
         console.log(showShipDB)
-
-        let starStatus   = showShipDB[0].star
-        let damageStatus = showShipDB[0].damage
-        let roundsStatus = showShipDB[0].rounds
-        let idStatus     = showShipDB[0].id
+        
+        let nftLife      = showShipDB[0]?.life ?? undefined
+        
 
         if (showUserDB.length === 1) 
         {
-            res.json({
-                id: idStatus,
-                star: starStatus,
-                rounds: roundsStatus,
-                damage: damageStatus
+            if (showShipDB.length === 1) {
+                res.json({
+                    code: 150,
+                    life: nftLife
+                })
+            }
+            else
+            {
+                res.json({
+                    code: 250
+                })
+            }
             
-            })
         }
         else
         {
@@ -72,7 +76,7 @@ exports.select = async (req, res) => {
     else
     {
         res.json({
-            message: 'Error Adresss'
+            message: 'Error Address'
         })
     }
 

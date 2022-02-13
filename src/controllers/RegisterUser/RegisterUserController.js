@@ -5,6 +5,21 @@ async function registerUser (addressUser, token)
     return knex('user').insert({ address: addressUser, token_acess: token })
 }
 
+async function insertInventory (address)
+{
+    return knex('inventory').insert({
+        owner: address
+    })
+}
+
+async function insertScore(address)
+{
+    return knex('score').insert({
+        owner: address
+    })
+}
+
+
 async function showUser (addressUser)
 {
 

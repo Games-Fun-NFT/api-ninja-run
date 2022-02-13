@@ -1,0 +1,10 @@
+1 - Vou colocar para cada score a pessoa recebe um pouco de recompensa.
+
+100 - score 2 token
+
+200 - score 4
+
+300 - score 6
+
+2 - Preciso definir novo valor dos itens, tickt, bomba.
+
