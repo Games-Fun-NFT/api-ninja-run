@@ -3,7 +3,7 @@ const app     = express()
 const cookieParser = require('cookie-parser');
 const cors    = require('cors')
 
-app.use(cors({origin: '*'}))
+app.use(cors())
 app.use(cookieParser())
 app.set('trust proxy', true)
 app.use(express.json())
