@@ -2,6 +2,9 @@ const express = require('express')
 const app     = express()
 const cors    = require('cors')
 
+res.header("Access-Control-Allow-Origin", "*");
+res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+
 app.use(cors())
 app.use(express.json())
 
