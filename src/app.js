@@ -1,11 +1,11 @@
 const express = require('express')
 const app     = express()
+const cookieParser = require('cookie-parser');
 const cors    = require('cors')
 
-app.use(cors({
-    origin: '*',
-    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
-}))
+app.use(cors({origin: 'http://127.0.0.1:5500'}))
+app.use(cookieParser())
+app.set('trust proxy', true)
 app.use(express.json())
 
 // routes

@@ -4,6 +4,7 @@
     "develop": "nodemon ./bin/server.js"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "dotenv-safe": "^8.2.0",
