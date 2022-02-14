@@ -85,7 +85,7 @@ exports.buy = async (req, res) =>
     let showNftStatusDB        = await showNftStatus()
     let showNftUser            = await showNft(userAddresFront)
 
-    let balanceUserDB =  showUserDB[0].balance_usdt
+    //let balanceUserDB =  showUserDB[0].balance_usdt
     let priceNftDB    =  pricesNft.price_nft
     let lifeStatusNft =  showNftUser[0].life
 

@@ -89,7 +89,7 @@ exports.buy = async (req, res) =>
     //console.log(showNftStatusDB)
     //console.log(pricesNft)
 
-    let balanceUserDB = showUserDB[0].balance_usdt
+    
     let priceNftDB    = pricesNft.price_nft
     let lifeStatusNft = showNftStatusDB[0].life
 
@@ -100,6 +100,8 @@ exports.buy = async (req, res) =>
 
     if(showUserDB.length > 0 && showNftUser.length === 0)
     {
+        let balanceUserDB = showUserDB[0].balance_usdt
+
        if (balanceUserDB >= priceNftDB) 
        {
         balanceUserDB = balanceUserDB - priceNftDB 

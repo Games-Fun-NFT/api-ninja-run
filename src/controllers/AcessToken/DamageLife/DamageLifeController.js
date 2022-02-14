@@ -9,7 +9,7 @@ async function showUser (token)
 
     } catch (error) 
     {
-        return error
+        return 'error'
     }
 
     
@@ -41,19 +41,23 @@ exports.damage = async (req, res) =>
 {
     let tokenGame = req.params.token
 
-    let userDB        = await showUser(tokenGame)
+    let userDB        = await showUser(tokenGame).catch((err) => { res.json({
+        message: 2
+    })})
    
-    console.log(userDB.length)
 
-    let userbalance   = userDB[0]?.balance_usdt ?? undefined
-    let userAddressDB = userDB[0]?.address ?? undefined 
+    // let userbalance   = userDB[0]?.balance_usdt ?? undefined
 
-    let showNFTDB     = await showNft(userAddressDB)
+    
 
-   
+//    console.length(userAddressDB)
 
     if (userDB.length === 1) {
-        console.log(showNFTDB.length)
+
+        let userAddressDB = userDB[0].address
+
+        let showNFTDB     = await showNft(userAddressDB)
+
 
         if (showNFTDB.length === 1) {
             let lifeNow = showNFTDB[0].life

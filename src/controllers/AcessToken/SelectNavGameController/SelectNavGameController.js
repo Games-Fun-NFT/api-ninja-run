@@ -39,11 +39,11 @@ exports.select = async (req, res) => {
 
     console.log(addresUserDB)
 
-    if (addresUserDB != undefined) 
+    if (showUserDB.length === 1) 
     {
         let showShipDB   = await showNft(addresUserDB)
         
-        let nftLife      = showShipDB[0]?.life ?? undefined
+        let nftLife      = showShipDB[0].life
         
 
         if (showUserDB.length === 1) 
