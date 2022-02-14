@@ -33,7 +33,9 @@ async function dataNow() {
 
     let mes_formart = date_ob.getUTCMonth()+1 < 10 ? '0' + month : month
 
-    let dataNow = year + "-" + mes_formart + "-" + date + 'T' + hours + ':' + minutesFormat
+    let hours_formart = date_ob.getUTCHours() < 10 ? '0' + hours : hours
+
+    let dataNow = year + "-" + mes_formart + "-" + date + 'T' + hours_formart + ':' + minutesFormat
 
     return dataNow
 }
