@@ -69,7 +69,7 @@ exports.deposit = async (req, res) => {
     console.log(userAddress)
     
     let selectBalanceResult = await selectBalance(userAddress).catch((err) => console.log('Address undefined'))
-    let currentBalanceUser  = parseInt(selectBalanceResult?.balance_usdt ?? null)
+    let currentBalanceUser  = parseInt(selectBalanceResult.balance_usdt)
     
 
     let currentTnxHash      = selectBalanceResult?.tnx_hash_usdt ?? ''
