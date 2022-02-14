@@ -45,8 +45,8 @@ exports.damage = async (req, res) =>
    
     console.log(userDB.length)
 
-    let userbalance   = userDB[0].balance_usdt
-    let userAddressDB = userDB[0].address
+    let userbalance   = userDB[0]?.balance_usdt ?? undefined
+    let userAddressDB = userDB[0]?.address ?? undefined 
 
     let showNFTDB     = await showNft(userAddressDB)
 

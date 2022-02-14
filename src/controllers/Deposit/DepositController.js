@@ -62,6 +62,7 @@ async function selectMoralisDB (tnxHash) {
 exports.deposit = async (req, res) => {
     let info = req.body
 
+
     let userAddress      = info.user
     let userTnxHash      = info.tnxHash
     let userBalanceFront = parseInt(info.balance) 
@@ -69,10 +70,10 @@ exports.deposit = async (req, res) => {
     console.log(userAddress)
     
     let selectBalanceResult = await selectBalance(userAddress).catch((err) => console.log('Address undefined'))
-    let currentBalanceUser  = parseInt(selectBalanceResult.balance_usdt)
+    let currentBalanceUser  = parseInt(selectBalanceResult?.balance_usdt ?? null)
     
 
-    let currentTnxHash      = selectBalanceResult.tnx_hash_usdt
+    let currentTnxHash      = selectBalanceResult?.tnx_hash_usdt ?? ''
 
     let dataBackEnd         = await dataNow()
 
