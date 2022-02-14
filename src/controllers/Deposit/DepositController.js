@@ -62,9 +62,6 @@ async function selectMoralisDB (tnxHash) {
 exports.deposit = async (req, res) => {
     let info = req.body
 
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
-
     let userAddress      = info.user
     let userTnxHash      = info.tnxHash
     let userBalanceFront = parseInt(info.balance) 

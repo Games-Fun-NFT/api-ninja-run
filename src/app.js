@@ -2,10 +2,9 @@ const express = require('express')
 const app     = express()
 const cors    = require('cors')
 
-header("Access-Control-Allow-Origin", "*");
-header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
-
-app.use(cors())
+app.use(cors({
+    origin: '*'
+}))
 app.use(express.json())
 
 // routes
