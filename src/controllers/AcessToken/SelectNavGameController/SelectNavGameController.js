@@ -34,7 +34,7 @@ exports.select = async (req, res) => {
     let token_acess = req.params.token
 
     let showUserDB   = await showUser(token_acess)
-    let addresUserDB = showUserDB[0]?.address ?? undefined
+    let addresUserDB = showUserDB[0].address
     
 
     console.log(addresUserDB)
@@ -43,7 +43,7 @@ exports.select = async (req, res) => {
     {
         let showShipDB   = await showNft(addresUserDB)
         
-        let nftLife      = showShipDB[0]?.life ?? undefined
+        let nftLife      = showShipDB[0].life
         
 
         if (showUserDB.length === 1) 
