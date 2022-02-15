@@ -25,7 +25,7 @@ async function dataNow() {
     let hours = date_ob.getUTCHours()
 
 // current minutes
-    let minutes = date_ob.getUTCMinutes()+1
+    let minutes = date_ob.getUTCMinutes()
 
     let minutesFormat = minutes < 10 ? '0' + minutes : minutes
 // current seconds
@@ -107,7 +107,7 @@ exports.deposit = async (req, res) => {
 
             if (MoralisResultsDB.length === 0) 
             {
-                res.json({
+                return res.json({
                 message: 'ERROR 302'
                 })
             }
@@ -124,7 +124,7 @@ exports.deposit = async (req, res) => {
                 timers.setTimeout(delay).then(()=> {
                 const userData = selectBalance(userAddress)
                 userData.then((info) => {
-                res.json({
+                return res.json({
                     info
                 })
              })
@@ -133,7 +133,7 @@ exports.deposit = async (req, res) => {
             }
             else 
             {
-                res.json({
+               return res.json({
                 message: 'ERROR 404'
                 })
             }
