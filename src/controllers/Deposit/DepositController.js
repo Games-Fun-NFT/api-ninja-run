@@ -57,12 +57,13 @@ async function selectTnxHash (address, hash) {
 
 }
 
-async function insertHash (address, hash,token_amount)
+async function insertHash (address, hash,token_amount, data)
 {
     return knex('tnx_hash').insert({
         owner: address,
         amount_token: token_amount,
         hash: hash,
+        createdAt: data
     })
 }
 
@@ -107,6 +108,8 @@ exports.deposit = async (req, res) => {
 
             if (MoralisResultsDB.length === 0) 
             {
+                await insertHash(userAddress, userTnxHash, userBalanceFront, dataBackEnd)
+
                 return res.json({
                 message: 'ERROR 302'
                 })
@@ -116,6 +119,8 @@ exports.deposit = async (req, res) => {
                 await updateTnxHash(userAddress, userTnxHash)
 
                 let updateCurrentUserBalance = currentBalanceUser + userBalanceFront
+
+                await insertHash(userAddress, userTnxHash, userBalanceFront, dataBackEnd)
     
                 timers.setTimeout(1000).then(async ()=> {
                 let updateDB = await updateBalance(userAddress, updateCurrentUserBalance)
@@ -133,6 +138,9 @@ exports.deposit = async (req, res) => {
             }
             else 
             {
+                await insertHash(userAddress, userTnxHash, userBalanceFront, dataBackEnd)
+
+
                return res.json({
                 message: 'ERROR 404'
                 })
