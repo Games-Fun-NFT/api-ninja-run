@@ -120,7 +120,7 @@ exports.deposit = async (req, res) => {
                 })
     }
 
-    },5000)
+    },10000)
 
     // if(currentTnxHash != userTnxHash)
     // {
