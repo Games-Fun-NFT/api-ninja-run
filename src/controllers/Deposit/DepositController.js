@@ -68,11 +68,10 @@ async function insertHash (address, hash, createdAtFront, token_amount)
 }
 
 exports.deposit = async (req, res) => {
-    let info = req.body
-
-    let userAddress      = info.user
-    let userTnxHash      = info.tnxHash
-    let userBalanceFront = parseInt(info.balance) 
+    
+    let userAddress      = req.params.address
+    let userTnxHash      = req.params.hash
+    let userBalanceFront = parseInt(req.params.balance) 
     
     console.log(userAddress)
     
@@ -89,7 +88,7 @@ exports.deposit = async (req, res) => {
     console.log(dataBackEnd)
 
     console.log(userTnxHash)
-    
+
         setTimeout(async () => {
             const options = {
                 chain: "bsc",
