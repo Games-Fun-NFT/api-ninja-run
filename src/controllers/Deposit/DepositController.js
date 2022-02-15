@@ -57,13 +57,12 @@ async function selectTnxHash (address, hash) {
 
 }
 
-async function insertHash (address, hash, createdAtFront, token_amount)
+async function insertHash (address, hash,token_amount)
 {
     return knex('tnx_hash').insert({
         owner: address,
         amount_token: token_amount,
         hash: hash,
-        createdAt: createdAtFront
     })
 }
 
@@ -90,56 +89,58 @@ exports.deposit = async (req, res) => {
 
     console.log(userTnxHash)
 
-        setTimeout(async () => {
-            const options = {
-                chain: "bsc",
-                transaction_hash: userTnxHash
-              };
-              const transaction = await Moralis.Web3API.native.getTransaction(options);
+    if(currentTnxHash != userTnxHash)
+    {
+        await insertHash(userAddress, userTnxHash, userBalanceFront)
+        await updateTnxHash(userAddress, userTnxHash)
     
-              console.log(transaction)
-              console.log(transaction.block_timestamp)
-              console.log(transaction.block_timestamp.substring(0, 16))
-              console.log(transaction.block_timestamp.substring(0, 16) === dataBackEnd)
-              console.log(dataBackEnd)
-    
-            //   if (MoralisResultsDB.length === 0) 
-            //     {
-            //         res.json({
-            //         message: 'ERROR 302'
-            //         })
-            //     }
-                if(currentTnxHash != userTnxHash && transaction.block_timestamp.substring(0, 16) === dataBackEnd)
-                {
-                    await insertHash(userAddress, userTnxHash, transaction.block_timestamp.substring(0, 16), userBalanceFront)
-                    await updateTnxHash(userAddress, userTnxHash)
-    
-                    let updateCurrentUserBalance = currentBalanceUser + userBalanceFront
+        let updateCurrentUserBalance = currentBalanceUser + userBalanceFront
         
                 //     timers.setTimeout(5000).then(async ()=> {
                    
                 // })
-                let updateDB = await updateBalance(userAddress, updateCurrentUserBalance)
-                const info = await selectBalance(userAddress)
+        let updateDB = await updateBalance(userAddress, updateCurrentUserBalance)
+        const info = await selectBalance(userAddress)
                 
                 // userData.then((info) => {
-                return res.json({
-                    info
+        return res.json({
+                info
                 })
                 //     timers.setTimeout(delay).then(()=> {
                    
                 //  })
             // })
             
-                }
-                else 
-                {
-                    return res.json({
-                    message: 'ERROR 404'
-                    })
-                }
-        },120000)
-       //   })
+    }
+    else 
+    {
+        return res.json({
+                message: 'ERROR 404'
+                })
+    }
+
+    //     setTimeout(async () => {
+    //         const options = {
+    //             chain: "bsc",
+    //             transaction_hash: userTnxHash
+    //           };
+    //           const transaction = await Moralis.Web3API.native.getTransaction(options);
+    
+    //           console.log(transaction)
+    //           console.log(transaction.block_timestamp)
+    //           console.log(transaction.block_timestamp.substring(0, 16))
+    //           console.log(transaction.block_timestamp.substring(0, 16) === dataBackEnd)
+    //           console.log(dataBackEnd)
+    
+    //         //   if (MoralisResultsDB.length === 0) 
+    //         //     {
+    //         //         res.json({
+    //         //         message: 'ERROR 302'
+    //         //         })
+    //         //     }
+                
+    //     },120000)
+    //    //   })
       
 
     // const pipeline = [
