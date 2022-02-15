@@ -1,4 +1,5 @@
 const knex  = require('../../db/knex')
+const jwt   = require('jsonwebtoken')
 
 async function showUser (addressUser, res)
 {
@@ -92,6 +93,13 @@ exports.buy = async (req, res) =>
     if(showUserDB.length > 0 && showNftUser.length === 1)
     {
        
+
+        let token_acess = showUserDB[0].token_acess
+
+        const token = jwt.sign({ token_acess }, process.env.SECRET, {
+            expiresIn: 300 // expires in 5min
+          });
+
 
         res.json({
             code: 200,
