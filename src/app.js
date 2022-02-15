@@ -38,6 +38,7 @@ const WinGameRoutes          = require('./routes/AcessToken/WinGame/WinGameRoute
 const selectNftRoutes        = require('./routes/AcessToken/SelectNavRoutes/SelectNavRoutes')
 const damageUserRoutes       = require('./routes/AcessToken/DamageLife/DamageLifeRoutes')
 const IndexRoute             = require('./routes/Index/IndexRoute')
+const TotalNftRoute          = require('./routes/BuyNft/TotalNft/TotalNftRoutes')
 
 app.use('/', IndexRoute)
 app.use('/register', RegisterUserRoutes)
@@ -50,6 +51,7 @@ app.use('/token', TokenAcessRoutes)
 app.use('/win', verifyJWT ,WinGameRoutes)
 app.use('/nft', verifyJWT ,selectNftRoutes)
 app.use('/damage', verifyJWT ,damageUserRoutes)
+app.use('/total', TotalNftRoute)
 
 //
 

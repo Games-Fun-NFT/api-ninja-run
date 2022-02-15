@@ -21,8 +21,6 @@ exports.user = async (req, res) => {
 
     let showUserDB = await showUser(userAddres)
 
-    console.log()
-
     if (showUser.length === 1) {
 
 
