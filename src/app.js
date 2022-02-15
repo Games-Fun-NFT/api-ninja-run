@@ -4,17 +4,19 @@ const cookieParser = require('cookie-parser');
 const cors    = require('cors')
 const jwt     = require('jsonwebtoken')
 
-app.use(cors({
-  "origin": "*",
-  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-  "preflightContinue": false,
-  "optionsSuccessStatus": 204
-}))
+app.use(cors( ))
 app.use(cookieParser())
 app.set('trust proxy', true)
 app.use(express.json())
 
 // routes
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://www.hub-games.com/"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 function verifyJWT(req, res, next){
     const token = req.headers['token-api']
