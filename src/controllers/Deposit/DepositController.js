@@ -123,7 +123,9 @@ exports.deposit = async (req, res) => {
                 const info = await selectBalance(userAddress)
                 
                 // userData.then((info) => {
-                
+                return res.json({
+                    info
+                })
                 //     timers.setTimeout(delay).then(()=> {
                    
                 //  })
@@ -132,13 +134,13 @@ exports.deposit = async (req, res) => {
                 }
                 else 
                 {
-                    res.json({
+                    return res.json({
                     message: 'ERROR 404'
                     })
                 }
         },120000)
        
-        res.json ({
+       return res.json ({
             message: "Wait 2 minutes"
         })
        //   })
