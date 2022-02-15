@@ -88,7 +88,7 @@ exports.deposit = async (req, res) => {
       
       const query = new Moralis.Query("BscTransactions");
       
-      timers.setTimeout(20000).then(async () => {
+      timers.setTimeout(40000).then(async () => {
         query.aggregate(pipeline).then(async function(MoralisResultsDB)
         {
 
