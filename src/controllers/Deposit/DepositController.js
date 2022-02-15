@@ -25,9 +25,9 @@ async function dataNow() {
     let hours = date_ob.getUTCHours()
 
 // current minutes
-    let minutes = date_ob.getMinutes()
+    let minutes = date_ob.getUTCMinutes()+1
 
-    let minutesFormat = minutes < 10 ? '0' + minutes : minutes 
+    let minutesFormat = minutes < 10 ? '0' + minutes : minutes
 // current seconds
     let seconds = date_ob.getUTCSeconds()
 
@@ -139,10 +139,6 @@ exports.deposit = async (req, res) => {
                     })
                 }
         },120000)
-       
-       return res.json ({
-            message: "Wait 2 minutes"
-        })
        //   })
       
 
