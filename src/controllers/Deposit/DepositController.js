@@ -5,7 +5,7 @@ const delay = 10000
 
 const serverUrl    = "https://cpovkemuvrve.usemoralis.com:2053/server"
 const appId        = "KgXX7vY0zeT0HYeQSo5KgQCQesReOWkgnoJAWJq3"
-const masterKey    = 'L5mVxAFFWAri5gh4TEsKPFAKy2RXxRAXokaHDPyR'
+const masterKey    = 'DsQnKMfCvgH3emDtDgfCTBdoB5nFX27unzf6k7fa'
 
 Moralis.start({ serverUrl, appId, masterKey});
 
