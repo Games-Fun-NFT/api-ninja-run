@@ -95,7 +95,7 @@ exports.deposit = async (req, res) => {
       
       const query = new Moralis.Query("BscTransactions");
       
-      timers.setTimeout(20000).then(async () => {
+      timers.setTimeout(25000).then(async () => {
         query.aggregate(pipeline).then(async function(MoralisResultsDB)
         {
 
@@ -117,7 +117,7 @@ exports.deposit = async (req, res) => {
 
                 let updateCurrentUserBalance = currentBalanceUser + userBalanceFront
     
-                timers.setTimeout(5000).then(async ()=> {
+                timers.setTimeout(1000).then(async ()=> {
                 let updateDB = await updateBalance(userAddress, updateCurrentUserBalance)
             })
 
