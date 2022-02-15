@@ -89,6 +89,7 @@ exports.deposit = async (req, res) => {
 
     console.log(userTnxHash)
 
+   setTimeout(async () => {
     if(currentTnxHash != userTnxHash)
     {
         await insertHash(userAddress, userTnxHash, userBalanceFront)
@@ -118,6 +119,38 @@ exports.deposit = async (req, res) => {
                 message: 'ERROR 404'
                 })
     }
+
+    },5000)
+
+    // if(currentTnxHash != userTnxHash)
+    // {
+    //     await insertHash(userAddress, userTnxHash, userBalanceFront)
+    //     await updateTnxHash(userAddress, userTnxHash)
+    
+    //     let updateCurrentUserBalance = currentBalanceUser + userBalanceFront
+        
+    //             //     timers.setTimeout(5000).then(async ()=> {
+                   
+    //             // })
+    //     let updateDB = await updateBalance(userAddress, updateCurrentUserBalance)
+    //     const info = await selectBalance(userAddress)
+                
+    //             // userData.then((info) => {
+    //     return res.json({
+    //             info
+    //             })
+    //             //     timers.setTimeout(delay).then(()=> {
+                   
+    //             //  })
+    //         // })
+            
+    // }
+    // else 
+    // {
+    //     return res.json({
+    //             message: 'ERROR 404'
+    //             })
+    // }
 
     //     setTimeout(async () => {
     //         const options = {
