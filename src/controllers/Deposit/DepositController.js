@@ -97,7 +97,7 @@ exports.deposit = async (req, res) => {
 
       //timers.setTimeout(120000).then(async () => {
 
-        setTimeout(async () => {
+        //setTimeout(async () => {
             const options = {
                 chain: "bsc",
                 transaction_hash: userTnxHash
@@ -145,7 +145,7 @@ exports.deposit = async (req, res) => {
                     message: 'ERROR 404'
                     })
                 }
-        },120000)
+        //},120000)
        
        //   })
       
