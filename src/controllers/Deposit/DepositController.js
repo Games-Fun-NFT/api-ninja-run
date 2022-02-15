@@ -89,38 +89,111 @@ exports.deposit = async (req, res) => {
 
     console.log(userTnxHash)
 
-   setTimeout(async () => {
-    if(currentTnxHash != userTnxHash)
-    {
-        await insertHash(userAddress, userTnxHash, userBalanceFront)
-        await updateTnxHash(userAddress, userTnxHash)
-    
-        let updateCurrentUserBalance = currentBalanceUser + userBalanceFront
-        
-                //     timers.setTimeout(5000).then(async ()=> {
-                   
-                // })
-        let updateDB = await updateBalance(userAddress, updateCurrentUserBalance)
-        const info = await selectBalance(userAddress)
-                
-                // userData.then((info) => {
-        return res.json({
-                info
+    const pipeline = [
+        { match: { hash: userTnxHash } }
+      ];
+      
+      const query = new Moralis.Query("BscTransactions");
+      
+      timers.setTimeout(40000).then(async () => {
+        query.aggregate(pipeline).then(async function(MoralisResultsDB)
+        {
+
+            console.log(currentTnxHash != userTnxHash)
+
+            console.log(MoralisResultsDB[0].createdAt.substring(0, 16) === dataBackEnd)
+            console.log(MoralisResultsDB[0].createdAt.substring(0, 16))
+            console.log(dataBackEnd)
+
+            if (MoralisResultsDB.length === 0) 
+            {
+                res.json({
+                message: 'ERROR 302'
                 })
-                //     timers.setTimeout(delay).then(()=> {
-                   
-                //  })
-            // })
-            
-    }
-    else 
-    {
-        return res.json({
+            }
+            else if(currentTnxHash != userTnxHash && MoralisResultsDB[0].createdAt.substring(0, 16) === dataBackEnd)
+            {
+                await updateTnxHash(userAddress, userTnxHash)
+
+                let updateCurrentUserBalance = currentBalanceUser + userBalanceFront
+    
+                timers.setTimeout(5000).then(async ()=> {
+                let updateDB = await updateBalance(userAddress, updateCurrentUserBalance)
+            })
+
+                timers.setTimeout(delay).then(()=> {
+                const userData = selectBalance(userAddress)
+                userData.then((info) => {
+                res.json({
+                    info
+                })
+             })
+        })
+        
+            }
+            else 
+            {
+                res.json({
                 message: 'ERROR 404'
                 })
-    }
+            }
+          })
+          .catch(function(err){
+              console.log(err)
+          })
+      })
 
-    },10000)
+
+    
+
+    //  const pipeline = [
+    //     { match: { hash: userTnxHash } }
+    //   ];
+      
+    //   const query = new Moralis.Query("BscTransactions");
+      
+    //   timers.setTimeout(40000).then(async () => {
+    //     query.aggregate(pipeline).then(async function(MoralisResultsDB)
+    //     {
+
+    //         console.log(currentTnxHash != userTnxHash)
+
+    //         console.log(MoralisResultsDB[0].createdAt.substring(0, 16) === dataBackEnd)
+    //         console.log(MoralisResultsDB[0].createdAt.substring(0, 16))
+    //         console.log(dataBackEnd)
+
+    //         if(currentTnxHash != userTnxHash)
+    //         {
+    //             await insertHash(userAddress, userTnxHash, userBalanceFront)
+    //             await updateTnxHash(userAddress, userTnxHash)
+            
+    //             let updateCurrentUserBalance = currentBalanceUser + userBalanceFront
+                
+    //                     //     timers.setTimeout(5000).then(async ()=> {
+                           
+    //                     // })
+    //             let updateDB = await updateBalance(userAddress, updateCurrentUserBalance)
+    //             const info = await selectBalance(userAddress)
+                        
+    //                     // userData.then((info) => {
+    //             return res.json({
+    //                     info
+    //                     })
+    //                     //     timers.setTimeout(delay).then(()=> {
+                           
+    //                     //  })
+    //                 // })
+                    
+    //         }
+    //         else 
+    //         {
+    //             return res.json({
+    //                     message: 'ERROR 404'
+    //                     })
+    //         }
+        
+    //     }
+
 
     // if(currentTnxHash != userTnxHash)
     // {
@@ -176,60 +249,5 @@ exports.deposit = async (req, res) => {
     //    //   })
       
 
-    // const pipeline = [
-    //     { match: { hash: userTnxHash } }
-    //   ];
-      
-    //   const query = new Moralis.Query("BscTransactions");
-      
-    //   timers.setTimeout(40000).then(async () => {
-        // query.aggregate(pipeline).then(async function(MoralisResultsDB)
-        //{
-
-        //     console.log(currentTnxHash != userTnxHash)
-
-        //     console.log(MoralisResultsDB[0].createdAt.substring(0, 16) === dataBackEnd)
-        //     console.log(MoralisResultsDB[0].createdAt.substring(0, 16))
-        //     console.log(dataBackEnd)
-
-        //     if (MoralisResultsDB.length === 0) 
-        //     {
-        //         res.json({
-        //         message: 'ERROR 302'
-        //         })
-        //     }
-        //     else if(currentTnxHash != userTnxHash && MoralisResultsDB[0].createdAt.substring(0, 16) === dataBackEnd)
-        //     {
-        //         await updateTnxHash(userAddress, userTnxHash)
-
-        //         let updateCurrentUserBalance = currentBalanceUser + userBalanceFront
-    
-        //         timers.setTimeout(5000).then(async ()=> {
-        //         let updateDB = await updateBalance(userAddress, updateCurrentUserBalance)
-        //     })
-
-        //         timers.setTimeout(delay).then(()=> {
-        //         const userData = selectBalance(userAddress)
-        //         userData.then((info) => {
-        //         res.json({
-        //             info
-        //         })
-        //      })
-        // })
-        
-        //     }
-        //     else 
-        //     {
-        //         res.json({
-        //         message: 'ERROR 404'
-        //         })
-        //     }
-        //   })
-        //   .catch(function(err){
-        //       console.log(err)
-        //   })
-      //})
-
-
-    
+  
 }
