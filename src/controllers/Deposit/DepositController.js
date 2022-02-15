@@ -89,59 +89,56 @@ exports.deposit = async (req, res) => {
     console.log(dataBackEnd)
 
     console.log(userTnxHash)
-
-
     
-   
-      
-
-      //timers.setTimeout(120000).then(async () => {
-
-        //setTimeout(async () => {
+        setTimeout(async () => {
             const options = {
                 chain: "bsc",
                 transaction_hash: userTnxHash
               };
-              const transaction = Moralis.Web3API.native.getTransaction(options)
-
-              transaction.then((test) => {
-
-              console.log(test)
-
-              })
-              //console.log(transaction.block_timestamp)
-              //console.log(transaction.block_timestamp.substring(0, 16))
-             // console.log(transaction.block_timestamp.substring(0, 16) === dataBackEnd)
-              //console.log(dataBackEnd)
+              const transaction = await Moralis.Web3API.native.getTransaction(options);
     
-                // if(currentTnxHash != userTnxHash && transaction.block_timestamp.substring(0, 16) === dataBackEnd)
-                // {
-                //     insertHash(userAddress, userTnxHash, transaction.block_timestamp.substring(0, 16), userBalanceFront)
-                //     updateTnxHash(userAddress, userTnxHash)
+              console.log(transaction)
+              console.log(transaction.block_timestamp)
+              console.log(transaction.block_timestamp.substring(0, 16))
+              console.log(transaction.block_timestamp.substring(0, 16) === dataBackEnd)
+              console.log(dataBackEnd)
     
-                //     let updateCurrentUserBalance = currentBalanceUser + userBalanceFront
+            //   if (MoralisResultsDB.length === 0) 
+            //     {
+            //         res.json({
+            //         message: 'ERROR 302'
+            //         })
+            //     }
+                if(currentTnxHash != userTnxHash && transaction.block_timestamp.substring(0, 16) === dataBackEnd)
+                {
+                    await insertHash(userAddress, userTnxHash, transaction.block_timestamp.substring(0, 16), userBalanceFront)
+                    await updateTnxHash(userAddress, userTnxHash)
+    
+                    let updateCurrentUserBalance = currentBalanceUser + userBalanceFront
         
                 //     timers.setTimeout(5000).then(async ()=> {
                    
                 // })
-                // let updateDB = updateBalance(userAddress, updateCurrentUserBalance)
-                // const info = selectBalance(userAddress)
+                let updateDB = await updateBalance(userAddress, updateCurrentUserBalance)
+                const info = await selectBalance(userAddress)
                 
                 // userData.then((info) => {
-                // res.json({
-                //     info
-                // })
-             
-            //     }
-            //     else 
-            //     {
-            //         res.json({
-            //         message: 'ERROR 404'
-            //         })
-            //     }
-            //   })
-    
-        //},120000)
+                res.json({
+                    info
+                })
+                //     timers.setTimeout(delay).then(()=> {
+                   
+                //  })
+            // })
+            
+                }
+                else 
+                {
+                    res.json({
+                    message: 'ERROR 404'
+                    })
+                }
+        },120000)
        
        //   })
       
