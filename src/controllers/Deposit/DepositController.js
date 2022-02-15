@@ -107,6 +107,8 @@ exports.deposit = async (req, res) => {
               transaction.then((test) => {
 
               console.log(test)
+
+              })
               //console.log(transaction.block_timestamp)
               //console.log(transaction.block_timestamp.substring(0, 16))
              // console.log(transaction.block_timestamp.substring(0, 16) === dataBackEnd)
