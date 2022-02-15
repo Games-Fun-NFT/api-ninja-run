@@ -103,10 +103,10 @@ exports.reload = async (req, res) =>
 
         await updateBalanceUser(userAddresFront, balanceUserDB)
 
-        await updateLifeUser(userAddresFront, 5)
+        await updateLifeUser(userAddresFront, 4)
 
         res.json({
-            life: 5
+            life: 4
         })
 
         }
