@@ -123,9 +123,7 @@ exports.deposit = async (req, res) => {
                 const info = await selectBalance(userAddress)
                 
                 // userData.then((info) => {
-                res.json({
-                    info
-                })
+                
                 //     timers.setTimeout(delay).then(()=> {
                    
                 //  })
