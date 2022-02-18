@@ -114,7 +114,7 @@ exports.buy = async (req, res) =>
         balanceUserDB = balanceUserDB - priceNftDB 
 
         await updateBalanceUser(userAddresFront, balanceUserDB)
-        await updateBalanceTokenUser(userAddresFront, 70)
+        await updateBalanceTokenUser(userAddresFront, 40)
         await insertNftUser(userAddresFront, lifeStatusNft)
 
         res.json({
