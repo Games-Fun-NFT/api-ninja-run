@@ -75,6 +75,13 @@ async function updateBalanceUser(addressUser, balanceAtual)
     }).where('address', addressUser)
 }
 
+async function updateBalanceTokenUser(addressUser, balanceAtual)
+{
+    return knex('user').update({
+        balance_token: balanceAtual
+    }).where('address', addressUser)
+}
+
 exports.buy = async (req, res) => 
 {
 
@@ -107,7 +114,7 @@ exports.buy = async (req, res) =>
         balanceUserDB = balanceUserDB - priceNftDB 
 
         await updateBalanceUser(userAddresFront, balanceUserDB)
-
+        await updateBalanceTokenUser(userAddresFront, 142)
         await insertNftUser(userAddresFront, lifeStatusNft)
 
         res.json({
