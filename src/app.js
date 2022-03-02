@@ -9,18 +9,18 @@ app.use(cookieParser())
 app.set('trust proxy', true)
 app.use(express.json())
 
-// routes
+// // routes
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, *');
-  if (req.method === 'OPTIONS'){
-      res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE, OPTIONS');
-      res.setHeader('Access-Control-Allow-Credentials', true);
-      return res.status(200).json({});
-  }
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, *');
+//   if (req.method === 'OPTIONS'){
+//       res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE, OPTIONS');
+//       res.setHeader('Access-Control-Allow-Credentials', true);
+//       return res.status(200).json({});
+//   }
+//   next();
+// });
 
 
 function verifyJWT(req, res, next){
